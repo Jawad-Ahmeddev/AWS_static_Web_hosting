@@ -1,0 +1,41 @@
+version: 0.2 
+
+ 
+
+phases: 
+
+  install: 
+
+    commands: 
+
+      - echo "No dependencies to install for this static site." 
+
+ 
+
+  build: 
+
+    commands: 
+
+      - echo "No build steps required for HTML/CSS site." 
+
+ 
+
+  post_build: 
+
+    commands: 
+
+      - echo "Syncing files to S3..." 
+
+      - aws s3 sync . s3://jdbucked --exclude ".git/*" --exclude "buildspec.yml" 
+
+      - echo "Build and deploy complete." 
+
+ 
+
+artifacts: 
+
+  files: 
+
+    - '**/*' 
+
+  discard-paths: yes 
